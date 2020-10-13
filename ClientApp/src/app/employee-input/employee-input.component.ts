@@ -64,6 +64,15 @@ export class EmployeeInputComponent implements OnInit {
     });
   }
 
+  addEmployee() {
+    (this.clientFormGroup.get("employees") as FormArray).push(this.addEmployeeToForm(new Employee()));
+  }
+
+  deleteEmployee(employeeIndex: number) {
+    let employeesFormArray = (this.clientFormGroup.get("employees") as FormArray);
+    employeesFormArray.removeAt(employeeIndex);
+  }
+
   addEmployeesToForm(client: Client): any[] {
     let employees = [];
 
@@ -88,6 +97,16 @@ export class EmployeeInputComponent implements OnInit {
       biWeeklyPay: [employee.biWeeklyPay == 0 ? 2000 : employee.biWeeklyPay, [Validators.required]],
       dependents: this.formBuilder.array(this.addDependentsToForm(employee))
     });
+  }
+
+  addDependent(employeeIndex: number) {
+    let dependentsFormArray = ((this.clientFormGroup.get("employees") as FormArray).at(employeeIndex).get("dependents") as FormArray);
+    dependentsFormArray.push(this.addDependentToForm(new Dependent()));
+  }
+
+  deleteDependent(employeeIndex: number, dependentIndex: number) {
+    let dependentsFormArray = ((this.clientFormGroup.get("employees") as FormArray).at(employeeIndex).get("dependents") as FormArray);
+    dependentsFormArray.removeAt(dependentIndex);
   }
 
   addDependentsToForm(employee: Employee): any[] {
