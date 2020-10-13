@@ -31,14 +31,13 @@ export class EmployeeInputComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.clientName = localStorage.getItem("clientName").trim();
-    if (this.clientName == null || this.clientName === '') {
-      //user not logged in, do redirect to home
+    this.clientName = localStorage.getItem("clientName");
+    if (this.clientName === null || this.clientName.match(/^ *$/) !== null) {
       this._router.navigateByUrl('/');
     }
 
-    let clientId = localStorage.getItem("clientId").trim();
-    this.clientService.getById(clientId)
+    let clientId = localStorage.getItem("clientId");
+    this.clientService.getById(clientId.trim())
       .subscribe(
         result => {
           this.client = result;

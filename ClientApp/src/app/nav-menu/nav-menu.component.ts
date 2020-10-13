@@ -12,4 +12,17 @@ export class NavMenuComponent {
   routeHome() {
     this._router.navigateByUrl('/');
   }
+
+  isUserLoggedIn(): boolean {
+    let clientId = localStorage.getItem("clientId");
+    if (clientId === null || clientId.match(/^ *$/) !== null) {
+      return false;
+    }
+    return true;
+  }
+
+  logUserOut() {
+    localStorage.removeItem("clientId");
+    localStorage.removeItem("clientName");
+  }
 }

@@ -51,7 +51,8 @@
       </mat-list>
     </mat-card-content>
   </mat-card>
-  <mat-card class="mat-card">
+  <mat-card class="mat-card"
+            *ngIf="!isUserLoggedIn()">
     <mat-card-header>
       <mat-card-title>
         Get Started
