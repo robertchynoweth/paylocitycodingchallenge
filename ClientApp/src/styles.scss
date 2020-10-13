@@ -17,7 +17,7 @@
 
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-@import '~@angular/material/theming';
+/*@import '~@angular/material/theming';
 
 @include mat-core();
 
@@ -37,7 +37,9 @@ $pay-app-theme: mat-light-theme((
   )
 ));
 
-@include angular-material-theme($pay-app-theme);
+@include angular-material-theme($pay-app-theme);*/
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
   margin: 0;

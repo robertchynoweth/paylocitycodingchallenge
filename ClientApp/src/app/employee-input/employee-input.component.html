@@ -34,6 +34,7 @@
                 <span matPrefix>$&nbsp;</span>
                 <span matSuffix>.00</span>
               </mat-form-field>
+
               <div formArrayName="dependents">
                 <div class="dependent-container"
                      *ngFor="let dependent of employeeDependents(employeeIndex).controls; let dependentIndex=index">
@@ -48,11 +49,34 @@
                       <input matInput formControlName="lastName">
                       <mat-error *ngIf="false">Last Name Required</mat-error>
                     </mat-form-field>
+                    <mat-checkbox formControlName="isSpouse">Spouse?</mat-checkbox>
+                    <button mat-raised-button class="delete-dependent" color="warn">
+                      <mat-icon>delete</mat-icon>
+                    </button>
                   </div>
                 </div>
               </div>
+
+
             </div>
-            <mat-divider *ngIf="employees.controls.length - 1 > employeeIndex"></mat-divider>
+            <div class="button-row">
+              <button mat-raised-button>
+                Add Dependent
+                <mat-icon>create</mat-icon>
+              </button>
+              <span class="fill-space"></span>
+              <button mat-raised-button color="warn">
+                Delete Employee
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <div>
+            <button mat-raised-button class="add-employee-button">
+              Add Employee
+              <mat-icon>create</mat-icon>
+            </button>
           </div>
         </div>
       </form>

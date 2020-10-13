@@ -15,14 +15,39 @@ input.example-right-align {
   -moz-appearance: textfield;
 }
 
-.employee-container .mat-form-field + .mat-form-field {
-  margin-left: 8px;
+.mat-checkbox {
+  margin-left: 12px;
 }
 
 .employee-container {
   margin-top: 20px;
 }
 
-.dependent-container .mat-form-field:first-child, p.dependentLabel {
+.dependent-container .mat-form-field:first-child,
+p.dependentLabel,
+button.delete-dependent,
+div.button-row .mat-raised-button {
   margin-left: 25px;
+}
+
+.delete-employee-button {
+  margin: 8px 8px 8px 0;
+  float: right;
+}
+
+.mat-raised-button {
+  margin-bottom: 18px;
+}
+
+.add-employee-button {
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
+div.button-row {
+  display: flex;
 }
