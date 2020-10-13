@@ -1,0 +1,61 @@
+<div class="main-div">
+  <mat-card class="mat-card">
+    <mat-card-header>
+      <mat-card-title>
+        {{clientName}} Employee Input
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form *ngIf="client" novalidate [formGroup]="clientFormGroup">
+        <div formArrayName="employees">
+          <div [formGroupName]="employeeIndex"
+               *ngFor="let employee of employees.controls; let employeeIndex=index">
+            <div class="employee-container">
+              <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+                <mat-error *ngIf="false">First Name Required</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+                <mat-error *ngIf="false">Last Name Required</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Hire Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dateHired" appOnlynumber>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Bi-weekly Pay</mat-label>
+                <input matInput type="number" class="example-right-align" formControlName="biWeeklyPay">
+                <mat-error *ngIf="false">Bi-weekly Pay Required</mat-error>
+                <span matPrefix>$&nbsp;</span>
+                <span matSuffix>.00</span>
+              </mat-form-field>
+              <div formArrayName="dependents">
+                <div class="dependent-container"
+                     *ngFor="let dependent of employeeDependents(employeeIndex).controls; let dependentIndex=index">
+                  <div [formGroupName]="dependentIndex">
+                    <mat-form-field appearance="fill">
+                      <mat-label>First Name</mat-label>
+                      <input matInput formControlName="firstName">
+                      <mat-error *ngIf="false">First Name Required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Last Name</mat-label>
+                      <input matInput formControlName="lastName">
+                      <mat-error *ngIf="false">Last Name Required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider *ngIf="employees.controls.length - 1 > employeeIndex"></mat-divider>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

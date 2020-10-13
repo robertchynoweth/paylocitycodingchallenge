@@ -10,7 +10,7 @@
             <p>
                 <mat-form-field appearance="standard">
                     <mat-label>Company Name</mat-label>
-                    <input matInput placeholder="Placeholder">
+                    <input matInput placeholder="Placeholder" [(ngModel)]="clientName">
                 </mat-form-field>
             </p>
             <button mat-raised-button (click)="login()">Login</button>

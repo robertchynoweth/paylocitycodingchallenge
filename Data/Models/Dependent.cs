@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,7 @@ namespace paylocity.Data.Models
 
         [Required]
         public bool IsSpouse { get; set; }
+
+        public int EmployeeId { get; set; }
     }
 }

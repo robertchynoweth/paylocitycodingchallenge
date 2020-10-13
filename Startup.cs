@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using paylocity.Data.Models;
+using paylocity.Data.Repositories;
+using paylocity.Data.UnitOfWork;
 
 namespace paylocity
 {
@@ -31,6 +33,11 @@ namespace paylocity
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddTransient<IRepository<Client>, ClientRepository>();
+            services.AddTransient<IRepository<Employee>, EmployeeRepository>();
+            services.AddTransient<IRepository<Dependent>, DependentRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

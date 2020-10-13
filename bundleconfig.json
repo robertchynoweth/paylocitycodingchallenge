@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "ClientApp/src/app/employee-input/employee-input.component.min.html",
+    "inputFiles": [
+      "ClientApp/src/app/employee-input/employee-input.component.html"
+    ]
+  }
+]

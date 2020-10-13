@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { MaterialModule } from './shared/material-module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { EmployeeInputComponent } from './employee-input/employee-input.component';
+import { ErrorDialogComponent } from './shared/dialogs/error-dialog.component';
+import { OnlynumberDirective } from './shared/onlynumber.directive';
 
 @NgModule({
   declarations: [
@@ -22,18 +25,23 @@ import { RegisterComponent } from './register/register.component';
     CounterComponent,
     FetchDataComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EmployeeInputComponent,
+    ErrorDialogComponent,
+    OnlynumberDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
+      { path: 'register', component: RegisterComponent },
+      { path: 'employeeinput', component: EmployeeInputComponent }
     ]),
     MaterialModule,
     BrowserAnimationsModule
