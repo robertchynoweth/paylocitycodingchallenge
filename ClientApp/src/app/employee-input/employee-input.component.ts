@@ -125,6 +125,7 @@ export class EmployeeInputComponent implements OnInit {
               let dependent = dependents.at(i);
               dependent.patchValue({ employeeId: result["id"] });
               //save all changed dependents
+              this.dependentSaveCheck(employeeIndex, i);
             }
 
             employee.markAsPristine({ onlySelf: true });
@@ -209,7 +210,7 @@ export class EmployeeInputComponent implements OnInit {
   dependentSaveCheck(employeeIndex: number, dependentIndex: number): void {
     let employee = (this.clientFormGroup.get("employees") as FormArray).at(employeeIndex) as FormGroup;
     let dependent = (employee.get("dependents") as FormArray).at(dependentIndex) as FormGroup;
-    if (dependent.valid && dependent.dirty) {
+    if (dependent.valid && dependent.dirty && !Number.isNaN(dependent.get("employeeId").value)) {
       let clonedDependent = { ...dependent.value };
       delete clonedDependent["id"];
       // New Employee
