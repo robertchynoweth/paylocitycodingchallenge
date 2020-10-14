@@ -54,7 +54,7 @@ namespace paylocity.Data.Repositories
 
         public virtual void RemoveRange(IEnumerable<object> entities)
         {
-            _context.Remove(entities);
+            _context.RemoveRange(entities);
         }
 
         public void SaveChanges()

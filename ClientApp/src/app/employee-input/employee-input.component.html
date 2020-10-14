@@ -26,7 +26,7 @@
               <mat-form-field appearance="fill">
                 <mat-label>Hire Date</mat-label>
                 <input matInput [matDatepicker]="picker" formControlName="dateHired" appOnlynumber
-                       (blur)="employeeSaveCheck(employeeIndex)">
+                       (dateChange)="employeeSaveCheck(employeeIndex)">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>

@@ -35,7 +35,7 @@ namespace paylocity.Controllers
             return new OkObjectResult(employee);
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int employeeId)
         {
             //remove employee's dependent's

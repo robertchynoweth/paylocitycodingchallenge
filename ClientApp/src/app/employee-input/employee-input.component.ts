@@ -71,7 +71,9 @@ export class EmployeeInputComponent implements OnInit {
   }
 
   addEmployee(): void {
-    (this.clientFormGroup.get("employees") as FormArray).push(this.addEmployeeToForm(new Employee()));
+    let employee = new Employee();
+    employee.clientId = this.clientId;
+    (this.clientFormGroup.get("employees") as FormArray).push(this.addEmployeeToForm(employee));
   }
 
   addEmployeesToForm(client: Client): any[] {
@@ -97,7 +99,7 @@ export class EmployeeInputComponent implements OnInit {
       firstName: [employee.firstName, [Validators.required, Validators.maxLength(100)]],
       lastName: [employee.lastName, [Validators.required, Validators.maxLength(100)]],
       dateHired: [employee.dateHired, [Validators.required]],
-      biWeeklyPay: [employee.biWeeklyPay == 0 ? 2000 : employee.biWeeklyPay, [Validators.required]],
+      biWeeklyPay: [Number.isNaN(employee.biWeeklyPay) ? 2000 : employee.biWeeklyPay, [Validators.required]],
       dependents: this.formBuilder.array(this.addDependentsToForm(employee)),
       clientId: employee.clientId
     });
@@ -106,7 +108,7 @@ export class EmployeeInputComponent implements OnInit {
   employeeSaveCheck(employeeIndex: number): void {
     let employee = (this.clientFormGroup.get("employees") as FormArray).at(employeeIndex) as FormGroup;
 
-    if (!employee.invalid && !employee.pristine) {
+    if (employee.valid && employee.dirty) {
       let clonedEmployee = { ...employee.value };
       delete clonedEmployee["dependents"];
       // New Employee
@@ -121,7 +123,8 @@ export class EmployeeInputComponent implements OnInit {
             let dependents = employee.get("dependents") as FormArray;
             for (let i = 0; i < dependents.length; i++) {
               let dependent = dependents.at(i);
-              dependent.patchValue({ employeeId: result["id"]});
+              dependent.patchValue({ employeeId: result["id"] });
+              //save all changed dependents
             }
 
             employee.markAsPristine({ onlySelf: true });
@@ -206,7 +209,7 @@ export class EmployeeInputComponent implements OnInit {
   dependentSaveCheck(employeeIndex: number, dependentIndex: number): void {
     let employee = (this.clientFormGroup.get("employees") as FormArray).at(employeeIndex) as FormGroup;
     let dependent = (employee.get("dependents") as FormArray).at(dependentIndex) as FormGroup;
-    if (!dependent.invalid && dependent.dirty) {
+    if (dependent.valid && dependent.dirty) {
       let clonedDependent = { ...dependent.value };
       delete clonedDependent["id"];
       // New Employee
