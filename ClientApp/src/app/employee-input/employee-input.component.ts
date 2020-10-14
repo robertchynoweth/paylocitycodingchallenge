@@ -108,7 +108,7 @@ export class EmployeeInputComponent implements OnInit {
   employeeSaveCheck(employeeIndex: number): void {
     let employee = (this.clientFormGroup.get("employees") as FormArray).at(employeeIndex) as FormGroup;
 
-    if (employee.valid && employee.dirty) {
+    if (this.employeeOnlyValidCheck(employee) && employee.dirty) {
       let clonedEmployee = { ...employee.value };
       delete clonedEmployee["dependents"];
       // New Employee
@@ -144,6 +144,13 @@ export class EmployeeInputComponent implements OnInit {
           });
       }
     }
+  }
+
+  employeeOnlyValidCheck(employee: FormGroup): boolean {
+    return employee.get("firstName").valid
+      && employee.get("lastName").valid
+      && employee.get("dateHired").valid
+      && employee.get("biWeeklyPay").valid;
   }
 
   deleteEmployee(employeeIndex: number): void {
