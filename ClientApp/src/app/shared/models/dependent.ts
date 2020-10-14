@@ -3,4 +3,5 @@ export class Dependent {
   firstName: string = null;
   lastName: string = null;
   isSpouse: boolean = false;
+  employeeId: number = NaN;
 }

@@ -13,24 +13,28 @@
             <div class="employee-container">
               <mat-form-field appearance="fill">
                 <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName">
-                <mat-error *ngIf="false">First Name Required</mat-error>
+                <input matInput formControlName="firstName"
+                       (blur)="employeeSaveCheck(employeeIndex)">
+                <mat-error>First Name Required</mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Last Name</mat-label>
-                <input matInput formControlName="lastName">
-                <mat-error *ngIf="false">Last Name Required</mat-error>
+                <input matInput formControlName="lastName"
+                       (blur)="employeeSaveCheck(employeeIndex)">
+                <mat-error>Last Name Required</mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Hire Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="dateHired" appOnlynumber>
+                <input matInput [matDatepicker]="picker" formControlName="dateHired" appOnlynumber
+                       (blur)="employeeSaveCheck(employeeIndex)">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Bi-weekly Pay</mat-label>
-                <input matInput type="number" class="example-right-align" formControlName="biWeeklyPay">
-                <mat-error *ngIf="false">Bi-weekly Pay Required</mat-error>
+                <input matInput type="number" class="example-right-align" formControlName="biWeeklyPay"
+                       (blur)="employeeSaveCheck(employeeIndex)">
+                <mat-error>Bi-weekly Pay Required</mat-error>
                 <span matPrefix>$&nbsp;</span>
                 <span matSuffix>.00</span>
               </mat-form-field>
@@ -40,16 +44,21 @@
                   <div [formGroupName]="dependentIndex">
                     <mat-form-field appearance="fill">
                       <mat-label>First Name</mat-label>
-                      <input matInput formControlName="firstName">
-                      <mat-error *ngIf="false">First Name Required</mat-error>
+                      <input matInput formControlName="firstName"
+                             (blur)="dependentSaveCheck(employeeIndex, dependentIndex)">
+                      <mat-error>First Name Required</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                       <mat-label>Last Name</mat-label>
-                      <input matInput formControlName="lastName">
-                      <mat-error *ngIf="false">Last Name Required</mat-error>
+                      <input matInput formControlName="lastName"
+                             (blur)="dependentSaveCheck(employeeIndex, dependentIndex)">
+                      <mat-error>Last Name Required</mat-error>
                     </mat-form-field>
-                    <mat-checkbox formControlName="isSpouse">Spouse?</mat-checkbox>
-                    <button mat-raised-button class="delete-dependent" color="warn"
+                    <mat-checkbox formControlName="isSpouse"
+                            (change)="dependentSpouseCheck(employeeIndex, dependentIndex)">
+                      Spouse?
+                    </mat-checkbox>
+                    <button type="button" mat-raised-button class="delete-dependent" color="warn"
                             (click)="deleteDependent(employeeIndex, dependentIndex)">
                       <mat-icon>delete</mat-icon>
                     </button>
@@ -58,12 +67,12 @@
               </div>
             </div>
             <div class="button-row">
-              <button mat-raised-button (click)="addDependent(employeeIndex)">
+              <button type="button" mat-raised-button (click)="addDependent(employeeIndex)">
                 Add Dependent
                 <mat-icon>create</mat-icon>
               </button>
               <span class="fill-space"></span>
-              <button mat-raised-button color="warn"
+              <button type="button" mat-raised-button color="warn"
                       (click)="deleteEmployee(employeeIndex)">
                 Delete Employee
                 <mat-icon>delete</mat-icon>
@@ -71,8 +80,8 @@
             </div>
             <mat-divider></mat-divider>
           </div>
-          <div>
-            <button mat-raised-button class="add-employee-button"
+          <div class="button-row">
+            <button type="button" mat-raised-button class="add-employee-button"
                     (click)="addEmployee()">
               Add Employee
               <mat-icon>create</mat-icon>

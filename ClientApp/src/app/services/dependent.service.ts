@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Dependent } from '../shared/models/dependent';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,12 @@ export class DependentService {
     return this.httpClient.post<Dependent>(this.baseUrl, dependent);
   }
 
-  delete(dependentId: number) {
-    return this.httpClient.delete(this.baseUrl + "?dependentId=" + dependentId);
+  put(dependent: Dependent) {
+    return this.httpClient.put<Dependent>(this.baseUrl, dependent);
+  }
+
+  delete(dependentId: number): Observable<any> {
+    let result = this.httpClient.delete(this.baseUrl + "?dependentId=" + dependentId);
+    return result;
   }
 }

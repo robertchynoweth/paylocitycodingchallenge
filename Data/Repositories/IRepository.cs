@@ -12,6 +12,7 @@ namespace paylocity.Data.Repositories
         IEnumerable<T> All();
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
         T Remove(T entity);
+        void RemoveRange(IEnumerable<object> entities);
         void SaveChanges();
     }
 }

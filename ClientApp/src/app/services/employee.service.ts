@@ -17,6 +17,10 @@ export class EmployeeService {
     return this.httpClient.post<Employee>(this.baseUrl, employee);
   }
 
+  put(employee: Employee) {
+    return this.httpClient.put<Employee>(this.baseUrl, employee);
+  }
+
   delete(employeeId: number) {
     return this.httpClient.delete(this.baseUrl + "?employeeId=" + employeeId);
   }

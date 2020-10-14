@@ -7,4 +7,5 @@ export class Employee {
   dateHired: Date = null;
   biWeeklyPay: number = NaN;
   dependents: Dependent[] = null;
+  clientId: number = NaN;
 }
