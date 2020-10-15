@@ -24,5 +24,6 @@ export class NavMenuComponent {
   logUserOut() {
     localStorage.removeItem("clientId");
     localStorage.removeItem("clientName");
+    this._router.navigateByUrl('/');
   }
 }
