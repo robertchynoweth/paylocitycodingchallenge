@@ -67,7 +67,7 @@
               </div>
             </div>
             <div class="button-row">
-              <button type="button" mat-raised-button (click)="addDependent(employeeIndex)">
+              <button type="button" class="employee-button-row" mat-raised-button (click)="addDependent(employeeIndex)">
                 Add Dependent
                 <mat-icon>create</mat-icon>
               </button>
@@ -85,6 +85,12 @@
                     (click)="addEmployee()">
               Add Employee
               <mat-icon>create</mat-icon>
+            </button>
+            <span class="fill-space"></span>
+            <button type="button" mat-raised-button class="add-employee-button"
+                    (click)="navigateToPath('/employeesummary')">
+              Employee Summary
+              <mat-icon>data_usage</mat-icon>
             </button>
           </div>
         </div>

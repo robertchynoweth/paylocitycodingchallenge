@@ -56,6 +56,10 @@ export class EmployeeInputComponent implements OnInit {
         });
   }
 
+  navigateToPath(path: string): void {
+    this._router.navigateByUrl(path);
+  }
+
   get employees(): FormArray {
     return this.clientFormGroup.get("employees") as FormArray;
   }

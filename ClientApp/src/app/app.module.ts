@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { EmployeeInputComponent } from './employee-input/employee-input.component';
 import { ErrorDialogComponent } from './shared/dialogs/error-dialog.component';
 import { OnlynumberDirective } from './shared/onlynumber.directive';
+import { EmployeeSummaryComponent } from './employee-summary/employee-summary.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { OnlynumberDirective } from './shared/onlynumber.directive';
     RegisterComponent,
     EmployeeInputComponent,
     ErrorDialogComponent,
-    OnlynumberDirective
+    OnlynumberDirective,
+    EmployeeSummaryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,7 +43,8 @@ import { OnlynumberDirective } from './shared/onlynumber.directive';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'employeeinput', component: EmployeeInputComponent }
+      { path: 'employeeinput', component: EmployeeInputComponent },
+      { path: 'employeesummary', component: EmployeeSummaryComponent }
     ]),
     MaterialModule,
     BrowserAnimationsModule

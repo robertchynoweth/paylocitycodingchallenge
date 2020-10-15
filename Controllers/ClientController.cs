@@ -10,10 +10,10 @@ namespace paylocity.Controllers
     [Route("api/[controller]")]
     public class ClientController : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<ClientController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ClientController(IUnitOfWork unitOfWork, ILogger<WeatherForecastController> logger)
+        public ClientController(IUnitOfWork unitOfWork, ILogger<ClientController> logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;

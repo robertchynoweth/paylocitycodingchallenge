@@ -26,7 +26,7 @@ input.example-right-align {
 .dependent-container .mat-form-field:first-child,
 p.dependentLabel,
 button.delete-dependent,
-div.button-row .mat-raised-button {
+div.button-row .employee-button-row {
   margin-left: 25px;
 }
 
@@ -42,6 +42,7 @@ div.button-row .mat-raised-button {
 .add-employee-button {
   margin-top: 15px;
   margin-bottom: 0px;
+  margin-left: 0px;
 }
 
 .fill-space {
