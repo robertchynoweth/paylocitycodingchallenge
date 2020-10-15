@@ -63,9 +63,9 @@ Some of the technology used in this coding challege is still pretty new to me an
   * To create a new account, one only need submit a new name. No checking is done on the front or backend to ensure the user is who they say they are.
   * If I had more time I would've implemented a JWT and verified the users on the back end.
 * More asynchronous functionality
-  * lfgj
+  * Angular 10 implemented async and await. This could've been used when fetching data.
 * Loading animations
-  * When data is being pulled from the backend the screen is blank. I would've added more loading animations.
+  * When data is being pulled from the backend the screen is blank. I would've added loading animations.
 * Unit testing
   * I haven't learned front end unit testing for Angular yet.
 * Proper component seperation
