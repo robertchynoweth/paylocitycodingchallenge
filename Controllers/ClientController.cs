@@ -12,11 +12,16 @@ namespace paylocity.Controllers
     {
         private readonly ILogger<ClientController> _logger;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IGenerateRandomData _generateRandomData;
 
-        public ClientController(IUnitOfWork unitOfWork, ILogger<ClientController> logger)
+        public ClientController(
+            IUnitOfWork unitOfWork,
+            ILogger<ClientController> logger,
+            IGenerateRandomData generateRandomData)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _generateRandomData = generateRandomData;
         }
 
         [HttpPost]
@@ -93,5 +98,27 @@ namespace paylocity.Controllers
 
             return new OkObjectResult(resultClient);
         }
+
+        [HttpGet("generateFakeData")]
+        public IActionResult GenerateFakeData(int clientId)
+        {
+            var employees = _generateRandomData.GenerateFakeData(clientId);
+
+            employees.ForEach(
+                x=> 
+                {
+                    var employee = _unitOfWork.EmployeeRepository.Add(x);
+                    x.Dependents.ForEach(
+                        y=> 
+                        {
+                            y.EmployeeId = employee.Id;
+                            _unitOfWork.DependentRepository.Add(y);
+                        });
+                });
+
+            _unitOfWork.SaveChanges();
+
+            return new OkResult();
+        }        
     }
 }

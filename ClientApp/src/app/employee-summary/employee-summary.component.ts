@@ -1,15 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  AbstractControl,
-  ValidatorFn,
-  FormArray,
-  FormArrayName
-} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 import { Router } from '@angular/router';
 import { Client } from '../shared/models/client';
@@ -28,8 +20,12 @@ export class EmployeeSummaryComponent implements OnInit, AfterViewInit {
 
   //Table components
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   
-  dataSource: MatTableDataSource<OrganizedEmployeeData>;
+  dataSource = new MatTableDataSource<OrganizedEmployeeData>();
+
+  pageLength: number = 0;
+  pageIndex: number = 0;
 
   organizedEmployeeData: OrganizedEmployeeData[];
   weeklySummaryData: WeeklySummaryData[];
@@ -65,21 +61,6 @@ export class EmployeeSummaryComponent implements OnInit, AfterViewInit {
   constructor(private clientService: ClientService,
     private _router: Router) { }
 
-  ngAfterViewInit() {
-    this.clientService.getById(this.clientId)
-      .subscribe(
-        result => {
-          this.client = result;
-          this.organizeData();
-          this.dataSource = new MatTableDataSource<OrganizedEmployeeData>(this.organizedEmployeeData);
-          this.dataSource.paginator = this.paginator;
-        },
-        error => {
-          console.log(error);
-          this._router.navigateByUrl('/');
-        });
-  }
-
   ngOnInit(): void {
     this.clientName = localStorage.getItem("clientName");
     if (this.clientName === null || this.clientName.match(/^ *$/) !== null) {
@@ -87,6 +68,27 @@ export class EmployeeSummaryComponent implements OnInit, AfterViewInit {
     }
 
     this.clientId = localStorage.getItem("clientId").trim();
+
+    this.clientService.getById(this.clientId)
+      .subscribe(
+        result => {
+          this.client = result;
+          this.organizeData();
+          this.dataSource = new MatTableDataSource(this.organizedEmployeeData);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error => {
+          console.log(error);
+          this._router.navigateByUrl('/');
+        });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.pageIndex = 0;
+    this.pageLength = this.organizedEmployeeData.length;
   }
 
   organizeData(): void {

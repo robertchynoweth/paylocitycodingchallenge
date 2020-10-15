@@ -38,6 +38,7 @@ namespace paylocity
             services.AddTransient<IRepository<Employee>, EmployeeRepository>();
             services.AddTransient<IRepository<Dependent>, DependentRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IGenerateRandomData, GenerateRandomData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

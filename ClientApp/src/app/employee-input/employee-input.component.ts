@@ -44,7 +44,11 @@ export class EmployeeInputComponent implements OnInit {
 
     let clientId = localStorage.getItem("clientId").trim();
     this.clientId = +clientId;
-    this.clientService.getById(clientId)
+    this.loadClientData();
+  }
+
+  loadClientData(): void {
+    this.clientService.getById(this.clientId.toString())
       .subscribe(
         result => {
           this.client = result;
@@ -260,5 +264,16 @@ export class EmployeeInputComponent implements OnInit {
         });
     }
     dependentsFormArray.removeAt(dependentIndex);
+  }
+
+  generateFakeData(): void {
+    this.clientService.generateFakeData(this.clientId)
+      .subscribe(
+        result => {
+          this.loadClientData();
+        },
+        error => {
+          console.log(error);
+        });    
   }
 }

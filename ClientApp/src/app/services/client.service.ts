@@ -14,9 +14,12 @@ export class ClientService {
   }
 
   post(clientName: string) {
-    let client = new Client();
-    client.name = clientName;
+    let client = { name: clientName};
     return this.httpClient.post<Client>(this.baseUrl, client);
+  }
+
+  generateFakeData(clientId: number) {
+    return this.httpClient.get<Client>(this.baseUrl + "/generateFakeData?clientId=" + clientId);
   }
 
   get(clientName: string) {
